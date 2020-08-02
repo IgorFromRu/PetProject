@@ -9,49 +9,45 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@RestController("users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "/users")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody User user) {
         userService.create(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/users")
+    @GetMapping
     public ResponseEntity<List<User>> read() {
         final List<User> users = userService.readAll();
-
         return users != null &&  !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/users/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<User> read(@PathVariable(name = "id") long id) {
         final User user = userService.getId(id);
-
         return user != null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "/users/{id}")
+    @PutMapping(value = "{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody User user) {
-        final boolean updated = userService.update(user, id);
-
+        final boolean updated = userService.update(id, user);
         return updated
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping(value = "/users/{id}")
+    @DeleteMapping(value = "{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") long id) {
         final boolean deleted = userService.delete(id);
-
         return deleted
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);

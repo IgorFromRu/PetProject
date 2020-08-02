@@ -35,13 +35,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(User user, long id) {
+    public boolean update(long id, User user) {
         if (userMap.containsKey(id)) {
             user.setId(id);
             userMap.put(id, user);
             return true;
         }
-
         return false;
     }
 
