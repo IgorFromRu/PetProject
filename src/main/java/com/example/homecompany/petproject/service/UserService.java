@@ -2,13 +2,17 @@ package com.example.homecompany.petproject.service;
 
 import com.example.homecompany.petproject.model.User;
 
+import java.util.List;
+
 public interface UserService {
 
     User create (User user);
 
-    User getId (int id);
+    User getId (long id);
 
-    User update (int id, User user);
+    boolean  update (User user,long id);
 
-    void delete (int id);
+    boolean delete (long id);
+
+    List<User> readAll();
 }

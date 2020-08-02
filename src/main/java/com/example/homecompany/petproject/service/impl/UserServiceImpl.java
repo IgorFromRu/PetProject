@@ -2,28 +2,32 @@ package com.example.homecompany.petproject.service.impl;
 
 import com.example.homecompany.petproject.model.User;
 import com.example.homecompany.petproject.service.UserService;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
+@Service
 public class UserServiceImpl implements UserService {
 
-    private Map <Integer, User> userMap = new HashMap<>();
+    private Map <Long, User> userMap = new HashMap<>();
 
-    private AtomicInteger idGen = new AtomicInteger(0);
+    private AtomicLong idGen = new AtomicLong(0);
 
 
     @Override
     public User create(User user) {
-        int id = idGen.incrementAndGet();
+        final Long id = idGen.incrementAndGet();
         user.setId(id);
         userMap.put(id, user);
         return user;
     }
 
     @Override
-    public User getId(int id) {
+    public User getId(long id) {
         if(userMap.get(id) == null ){
             throw new IllegalArgumentException("user not found, id=" + id);
         }
@@ -31,16 +35,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(int id, User user) {
-        User userUpdate = getId(id);
-        if (user.getName()!=null) userUpdate.setName(user.getName());
-        if (user.getEmail()!=null) userUpdate.setEmail(user.getEmail());
-        if (user.getPassword()!=null) userUpdate.setPassword(user.getPassword());
-        return userUpdate;
+    public boolean update(User user, long id) {
+        if (userMap.containsKey(id)) {
+            user.setId(id);
+            userMap.put(id, user);
+            return true;
+        }
+
+        return false;
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(long id) {
         userMap.remove(getId(id));
+        return userMap.remove(getId(id)) != null;
+    }
+
+    @Override
+    public List<User> readAll() {
+        return new ArrayList<>(userMap.values());
     }
 }
