@@ -24,12 +24,12 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<User>> read() {
         final List<User> users = userService.readAll();
-        return users != null &&  !users.isEmpty()
+        return users != null && !users.isEmpty()
                 ? new ResponseEntity<>(users, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "{id}")
     public ResponseEntity<User> read(@PathVariable(name = "id") long id) {
         final User user = userService.getId(id);
         return user != null

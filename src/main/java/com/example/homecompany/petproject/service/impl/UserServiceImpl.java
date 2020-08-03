@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private Map <Long, User> userMap = new HashMap<>();
+    private Map<Long, User> userMap = new HashMap<>();
 
     private AtomicLong idGen = new AtomicLong(0);
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getId(long id) {
-        if(userMap.get(id) == null ){
+        if (userMap.get(id) == null) {
             throw new IllegalArgumentException("user not found, id=" + id);
         }
         return userMap.get(id);

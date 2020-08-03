@@ -6,9 +6,13 @@ import java.util.List;
 
 public interface UserService {
 
-    User create (User user);
-    User getId (long id);
-    boolean  update (long id, User user);
-    boolean delete (long id);
+    User create(User user);
+
+    User getId(long id);
+
+    boolean update(long id, User user);
+
+    boolean delete(long id);
+
     List<User> readAll();
 }
