@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getId(long id) {
+    public User getUser(long id) {
         if (userMap.get(id) == null) {
             throw new IllegalArgumentException("user not found, id=" + id);
         }
@@ -41,12 +41,11 @@ public class UserServiceImpl implements UserService {
             userMap.put(id, user);
             return userMap.get(id);
         }
-        throw new IllegalArgumentException("user not updated, id=" + id);
+        throw new IllegalArgumentException("user not found, id=" + id);
     }
 
     @Override
     public boolean delete(long id) {
-        userMap.remove(id);
         return userMap.remove(id) != null;
     }
 

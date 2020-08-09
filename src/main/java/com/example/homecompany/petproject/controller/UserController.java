@@ -32,18 +32,18 @@ public class UserController {
 
     @GetMapping(value = "{id}")
     public ResponseEntity<User> read(@PathVariable(name = "id") long id) {
-        final User user = userService.getId(id);
+        final User user = userService.getUser(id);
         return user != null
                 ? new ResponseEntity<>(user, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping(value = "{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody User user) {
-        final User updated = userService.update(id, user);
-        return updated !=null
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    @PostMapping(value = "{id}")
+    public ResponseEntity<User> update(@PathVariable(name = "id") long id, @RequestBody User user) {
+        User userUpdate = userService.update(id, user);
+        return userUpdate != null
+                ? new ResponseEntity<>(user, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping(value = "{id}")
