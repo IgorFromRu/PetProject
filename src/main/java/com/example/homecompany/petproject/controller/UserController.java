@@ -40,8 +40,8 @@ public class UserController {
 
     @PutMapping(value = "{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") long id, @RequestBody User user) {
-        final boolean updated = userService.update(id, user);
-        return updated
+        final User updated = userService.update(id, user);
+        return updated !=null
                 ? new ResponseEntity<>(HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }

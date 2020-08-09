@@ -10,7 +10,7 @@ public interface UserService {
 
     User getId(long id);
 
-    boolean update(long id, User user);
+    User update(long id, User user);
 
     boolean delete(long id);
 

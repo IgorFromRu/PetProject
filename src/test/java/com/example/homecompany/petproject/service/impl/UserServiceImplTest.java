@@ -87,8 +87,8 @@ public class UserServiceImplTest {
         user1WithDataFromUser2.setName(USER2_NAME);
         user1WithDataFromUser2.setEmail(USER2_EMAIL);
         user1WithDataFromUser2.setPassword(USER2_PASSWORD);
-        boolean update = userService.update(USER1_ID, user1WithDataFromUser2);
-        assertTrue(update);
+        User update = userService.update(USER1_ID, user1WithDataFromUser2);
+        assertEquals(update, user1WithDataFromUser2);
         User user1 = userService.getId(USER1_ID);
         assertEquals(USER2_NAME, user1.getName());
         assertEquals(USER2_EMAIL, user1.getEmail());
