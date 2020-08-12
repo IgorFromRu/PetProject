@@ -87,12 +87,8 @@ public class UserServiceImplTest {
         user1WithDataFromUser2.setName(USER2_NAME);
         user1WithDataFromUser2.setEmail(USER2_EMAIL);
         user1WithDataFromUser2.setPassword(USER2_PASSWORD);
-        userService.update(USER1_ID, user1WithDataFromUser2);
-        User user1 = userService.getUser(USER1_ID);
-        assertEquals(USER2_NAME, user1.getName());
-        assertEquals(USER2_EMAIL, user1.getEmail());
-        assertEquals(USER2_PASSWORD, user1.getPassword());
-
+        User user1 = userService.update(USER1_ID, user1WithDataFromUser2);
+        assertEquals(user1WithDataFromUser2, user1);
     }
 
     @Test

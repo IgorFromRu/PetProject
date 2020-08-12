@@ -38,7 +38,7 @@ public class UserController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping(value = "{id}")
+    @PutMapping(value = "{id}")
     public ResponseEntity<User> update(@PathVariable(name = "id") long id, @RequestBody User user) {
         User userUpdate = userService.update(id, user);
         return userUpdate != null
