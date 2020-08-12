@@ -8,9 +8,9 @@ public interface UserService {
 
     User create(User user);
 
-    User getId(long id);
+    User getUser(long id);
 
-    boolean update(long id, User user);
+    User update(long id, User user);
 
     boolean delete(long id);
 
