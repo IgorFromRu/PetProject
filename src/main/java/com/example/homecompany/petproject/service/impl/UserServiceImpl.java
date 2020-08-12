@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User create(User user) {
+    public User createUser(User user) {
         final Long id = idGen.incrementAndGet();
         user.setId(id);
         userMap.put(id, user);
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getId(long id) {
+    public User getIdByUser(long id) {
         if (userMap.get(id) == null) {
             throw new IllegalArgumentException("user not found, id=" + id);
         }
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(long id, User user) {
+    public boolean updateUser(long id, User user) {
         if (userMap.containsKey(id)) {
             user.setId(id);
             userMap.put(id, user);
@@ -45,13 +45,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(long id) {
-        userMap.remove(getId(id));
-        return userMap.remove(getId(id)) != null;
+    public boolean deleteUser(long id) {
+        userMap.remove(getIdByUser(id));
+        return userMap.remove(getIdByUser(id)) != null;
     }
 
     @Override
-    public List<User> readAll() {
+    public List<User> getListUsers() {
         return new ArrayList<>(userMap.values());
     }
 }
