@@ -5,11 +5,10 @@ import com.example.homecompany.petproject.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
-import org.springframework.stereotype.Component;
 
 @Mapper
-@Component
 public interface UserMapper {
+
     @Mappings({
             @Mapping(target="id", source="dto.idDto"),
             @Mapping(target="name", source="dto.nameDto"),
@@ -19,10 +18,10 @@ public interface UserMapper {
     User user (UserDto dto);
 
     @Mappings({
-            @Mapping(target="idDto", source="entity.id"),
-            @Mapping(target="nameDto", source="entity.name"),
-            @Mapping(target="emailDto", source="entity.email"),
-            @Mapping(target="passwordDto", source="entity.password")
+            @Mapping(target="idDto", source="user.id"),
+            @Mapping(target="nameDto", source="user.name"),
+            @Mapping(target="emailDto", source="user.email"),
+            @Mapping(target="passwordDto", source="user.password")
     })
-    UserDto userDto(User entity);
+    UserDto userDto(User user);
 }

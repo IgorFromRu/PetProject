@@ -1,9 +1,8 @@
 package com.example.homecompany.petproject.controller;
 
 import com.example.homecompany.petproject.dto.UserDto;
-import com.example.homecompany.petproject.mapper.UserMapperImpl;
-import com.example.homecompany.petproject.model.User;
 import com.example.homecompany.petproject.mapper.UserMapper;
+import com.example.homecompany.petproject.model.User;
 import com.example.homecompany.petproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,7 @@ public class UserController {
         for (User user: users) {
             usersDto.add(userMapper.userDto(user));
         }
-        return usersDto != null && !users.isEmpty()
+        return usersDto != null && !usersDto.isEmpty()
                 ? new ResponseEntity<>(usersDto, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
