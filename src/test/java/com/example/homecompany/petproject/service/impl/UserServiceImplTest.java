@@ -15,6 +15,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplTest {
