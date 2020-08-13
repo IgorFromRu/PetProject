@@ -35,19 +35,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(long id, User user) {
+    public User updateUser(long id, User user) {
         if (userMap.containsKey(id)) {
             user.setId(id);
             userMap.put(id, user);
-            return true;
+            return userMap.get(id);
         }
-        return false;
+        throw new IllegalArgumentException("user not found, id=" + id);
     }
 
     @Override
     public boolean deleteUser(long id) {
-        userMap.remove(getIdByUser(id));
-        return userMap.remove(getIdByUser(id)) != null;
+        return userMap.remove(id) != null;
     }
 
     @Override

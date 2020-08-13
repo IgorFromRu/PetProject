@@ -15,7 +15,6 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserServiceImplTest {
@@ -87,13 +86,8 @@ public class UserServiceImplTest {
         user1WithDataFromUser2.setName(USER2_NAME);
         user1WithDataFromUser2.setEmail(USER2_EMAIL);
         user1WithDataFromUser2.setPassword(USER2_PASSWORD);
-        boolean update = userService.updateUser(USER1_ID, user1WithDataFromUser2);
-        assertTrue(update);
-        User user1 = userService.getIdByUser(USER1_ID);
-        assertEquals(USER2_NAME, user1.getName());
-        assertEquals(USER2_EMAIL, user1.getEmail());
-        assertEquals(USER2_PASSWORD, user1.getPassword());
-
+        User user1 = userService.updateUser(USER1_ID, user1WithDataFromUser2);
+        assertEquals(user1WithDataFromUser2, user1);
     }
 
     @Test

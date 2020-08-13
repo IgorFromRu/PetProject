@@ -51,11 +51,12 @@ public class UserController {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<?> updateUser(@PathVariable(name = "id") long id, @RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") long id, @RequestBody UserDto userDto) {
         User user = userMapper.user(userDto);
-        final boolean updated = userService.updateUser(id, user);
-        return updated
-                ? new ResponseEntity<>(HttpStatus.OK)
+        userService.updateUser(id, user);
+        UserDto userDtoUpdated = userMapper.userDto(user);
+        return userDtoUpdated != null
+                ? new ResponseEntity<>(userDto, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 

@@ -10,18 +10,18 @@ import org.mapstruct.Mappings;
 public interface UserMapper {
 
     @Mappings({
-            @Mapping(target="id", source="dto.idDto"),
-            @Mapping(target="name", source="dto.nameDto"),
-            @Mapping(target="email", source="dto.emailDto"),
-            @Mapping(target="password", source="dto.passwordDto")
+            @Mapping(target="id", source="dto.id"),
+            @Mapping(target="name", source="dto.name"),
+            @Mapping(target="email", source="dto.email"),
+            @Mapping(target="password", source="dto.password")
     })
     User user (UserDto dto);
 
     @Mappings({
-            @Mapping(target="idDto", source="user.id"),
-            @Mapping(target="nameDto", source="user.name"),
-            @Mapping(target="emailDto", source="user.email"),
-            @Mapping(target="passwordDto", source="user.password")
+            @Mapping(target="id", source="user.id"),
+            @Mapping(target="name", source="user.name"),
+            @Mapping(target="email", source="user.email"),
+            @Mapping(target="password", source="user.password")
     })
     UserDto userDto(User user);
 }
