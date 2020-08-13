@@ -56,7 +56,7 @@ public class UserController {
         userService.updateUser(id, user);
         UserDto userDtoUpdated = userMapper.userDto(user);
         return userDtoUpdated != null
-                ? new ResponseEntity<>(userDto, HttpStatus.OK)
+                ? new ResponseEntity<>(userDtoUpdated, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
