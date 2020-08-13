@@ -72,7 +72,7 @@ public class UserServiceImplTest {
 
     @Test
     public void getId() {
-        User user1 = userService.getIdByUser(USER1_ID);
+        User user1 = userService.getUserById(USER1_ID);
         assertNotNull(user1);
         assertEquals(USER1_ID, user1.getId());
         assertEquals(USER1_NAME, user1.getName());
@@ -95,7 +95,7 @@ public class UserServiceImplTest {
     public void delete() {
         boolean delete = userService.deleteUser(USER1_ID);
         assertTrue(delete);
-        assertThrows(IllegalArgumentException.class, () -> userService.getIdByUser(USER1_ID));
+        assertThrows(IllegalArgumentException.class, () -> userService.getUserById(USER1_ID));
     }
 
     @Test

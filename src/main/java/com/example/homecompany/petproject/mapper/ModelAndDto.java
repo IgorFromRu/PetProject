@@ -5,9 +5,7 @@ import com.example.homecompany.petproject.model.User;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface UserMapper {
-
+public interface ModelAndDto {
     User user (UserDto dto);
-
     UserDto userDto(User user);
 }

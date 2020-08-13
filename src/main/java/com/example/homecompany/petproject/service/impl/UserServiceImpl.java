@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getIdByUser(long id) {
+    public User getUserById(long id) {
         if (userMap.get(id) == null) {
             throw new IllegalArgumentException("user not found, id=" + id);
         }
