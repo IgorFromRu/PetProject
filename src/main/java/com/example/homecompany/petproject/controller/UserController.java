@@ -1,7 +1,7 @@
 package com.example.homecompany.petproject.controller;
 
 import com.example.homecompany.petproject.dto.UserDto;
-import com.example.homecompany.petproject.mapper.ModelAndDto;
+import com.example.homecompany.petproject.mapper.UserMapper;
 import com.example.homecompany.petproject.model.User;
 import com.example.homecompany.petproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,16 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private ModelAndDto modelAndDto;
+    private UserMapper userMapper;
 
     @Autowired
     private UserService userService;
 
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserDto userDto) {
-        final User user = modelAndDto.user(userDto);
+        final User user = userMapper.model(userDto);
         userService.createUser(user);
-        final UserDto userReturn = modelAndDto.userDto(user);
+        final UserDto userReturn = userMapper.dto(user);
         return userReturn != null
                 ? new ResponseEntity<>(userReturn, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -37,7 +37,7 @@ public class UserController {
         final List<User> users = userService.getListUsers();
         final List<UserDto> usersDto = new ArrayList<>();
         for (User user: users) {
-            usersDto.add(modelAndDto.userDto(user));
+            usersDto.add(userMapper.dto(user));
         }
         return usersDto != null && !usersDto.isEmpty()
                 ? new ResponseEntity<>(usersDto, HttpStatus.OK)
@@ -47,7 +47,7 @@ public class UserController {
     @GetMapping(value = "{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") long id) {
         final User user = userService.getUserById(id);
-        final UserDto userDto = modelAndDto.userDto(user);
+        final UserDto userDto = userMapper.dto(user);
         return userDto != null
                 ? new ResponseEntity<>(userDto, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -55,9 +55,9 @@ public class UserController {
 
     @PutMapping(value = "{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") long id, @RequestBody UserDto userDto) {
-        User user = modelAndDto.user(userDto);
+        User user = userMapper.model(userDto);
         userService.updateUser(id, user);
-        UserDto userDtoUpdated = modelAndDto.userDto(user);
+        UserDto userDtoUpdated = userMapper.dto(user);
         return userDtoUpdated != null
                 ? new ResponseEntity<>(userDtoUpdated, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
