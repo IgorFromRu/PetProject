@@ -57,7 +57,7 @@ public class UserController {
     public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") long id, @RequestBody UserDto userDto) {
         User user = userMapper.model(userDto);
         userService.updateUser(id, user);
-        UserDto userDtoUpdated = userMapper.dto(user);
+        UserDto userDtoUpdated = userMapper.dto(userService.getUserById(id));
         return userDtoUpdated != null
                 ? new ResponseEntity<>(userDtoUpdated, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);

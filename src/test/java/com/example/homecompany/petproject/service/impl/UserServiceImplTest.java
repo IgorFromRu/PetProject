@@ -24,7 +24,7 @@ public class UserServiceImplTest {
     private static final String USER1_NAME = "User1";
     private static final String USER1_EMAIL = "user1@mail.com";
     private static final String USER1_PASSWORD = "pass1";
-    private static Long USER2_ID;
+    private static Long USER2_ID ;
     private static final String USER2_NAME = "User2";
     private static final String USER2_EMAIL = "user2@mail.com";
     private static final String USER2_PASSWORD = "pass2";
@@ -72,12 +72,15 @@ public class UserServiceImplTest {
 
     @Test
     public void getId() {
-        User user1 = userService.getUserById(USER1_ID);
-        assertNotNull(user1);
-        assertEquals(USER1_ID, user1.getId());
-        assertEquals(USER1_NAME, user1.getName());
-        assertEquals(USER1_EMAIL, user1.getEmail());
-        assertEquals(USER1_PASSWORD, user1.getPassword());
+        User user = new User();
+        user.setName("Timur");
+        user.setEmail("tim@mail.com");
+        user.setPassword("pass");
+        userService.createUser(user);
+        assertNotNull(user);
+        assertEquals("Timur", user.getName());
+        assertEquals("tim@mail.com", user.getEmail());
+        assertEquals("pass", user.getPassword());
     }
 
     @Test
