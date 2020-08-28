@@ -36,7 +36,7 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getListUsers() {
         final List<User> users = userService.getListUsers();
         final List<UserDto> usersDto = new ArrayList<>();
-        for (User user: users) {
+        for (User user : users) {
             usersDto.add(userMapper.dto(user));
         }
         return usersDto != null && !usersDto.isEmpty()
@@ -56,8 +56,7 @@ public class UserController {
     @PutMapping(value = "{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable(name = "id") long id, @RequestBody UserDto userDto) {
         User user = userMapper.model(userDto);
-        userService.updateUser(id, user);
-        UserDto userDtoUpdated = userMapper.dto(userService.getUserById(id));
+        UserDto userDtoUpdated = userMapper.dto(userService.updateUser(id, user));
         return userDtoUpdated != null
                 ? new ResponseEntity<>(userDtoUpdated, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);

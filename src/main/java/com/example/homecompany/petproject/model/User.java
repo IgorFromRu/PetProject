@@ -6,19 +6,19 @@ import javax.persistence.*;
 
 @Data
 @Entity
-public class User{
+public class User {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(nullable = true)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
+    private Long id;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String password;
 
 }

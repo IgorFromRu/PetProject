@@ -23,10 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(long id) {
-        return userFromDatabase(userRepository.findById(id).get().getId(),
-                userRepository.findById(id).get().getName(),
-                userRepository.findById(id).get().getEmail(),
-                userRepository.findById(id).get().getPassword());
+        return userRepository.findById(id).get();
     }
 
     @Override
@@ -36,10 +33,7 @@ public class UserServiceImpl implements UserService {
             userRepository.findById(id).get().setEmail(user.getEmail());
             userRepository.findById(id).get().setPassword(user.getPassword());
 
-            return userFromDatabase(id,
-                    userRepository.findById(id).get().getName(),
-                    userRepository.findById(id).get().getEmail(),
-                    userRepository.findById(id).get().getPassword());
+            return userRepository.findById(id).get();
         }
         throw new IllegalArgumentException("user not found, id=" + id);
     }
@@ -49,22 +43,11 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
         if (userRepository.findById(id) == null) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     @Override
     public List<User> getListUsers() {
-        return (List<User>) userRepository.findAll();
-    }
-
-    private User userFromDatabase(long id, String name, String email, String password){
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setEmail(email);
-        user.setPassword(password);
-
-        return user;
+        return userRepository.findAll();
     }
 }
