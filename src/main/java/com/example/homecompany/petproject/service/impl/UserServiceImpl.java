@@ -29,10 +29,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(long id, User user) {
         if (userRepository.findById(id) != null) {
-            userRepository.findById(id).get().setName(user.getName());
-            userRepository.findById(id).get().setEmail(user.getEmail());
-            userRepository.findById(id).get().setPassword(user.getPassword());
-
+            user.setId(id);
+            userRepository.save(user);
             return userRepository.findById(id).get();
         }
         throw new IllegalArgumentException("user not found, id=" + id);
