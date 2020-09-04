@@ -72,12 +72,15 @@ public class UserServiceImplTest {
 
     @Test
     public void getId() {
-        User user1 = userService.getUserById(USER1_ID);
-        assertNotNull(user1);
-        assertEquals(USER1_ID, user1.getId());
-        assertEquals(USER1_NAME, user1.getName());
-        assertEquals(USER1_EMAIL, user1.getEmail());
-        assertEquals(USER1_PASSWORD, user1.getPassword());
+        User user = new User();
+        user.setName("Timur");
+        user.setEmail("tim@mail.com");
+        user.setPassword("pass");
+        userService.createUser(user);
+        assertNotNull(user);
+        assertEquals("Timur", user.getName());
+        assertEquals("tim@mail.com", user.getEmail());
+        assertEquals("pass", user.getPassword());
     }
 
     @Test

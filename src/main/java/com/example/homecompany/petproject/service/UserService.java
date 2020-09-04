@@ -3,6 +3,7 @@ package com.example.homecompany.petproject.service;
 import com.example.homecompany.petproject.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
 

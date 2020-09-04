@@ -1,56 +1,51 @@
 package com.example.homecompany.petproject.service.impl;
 
 import com.example.homecompany.petproject.model.User;
+import com.example.homecompany.petproject.repository.UserRepository;
 import com.example.homecompany.petproject.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    private Map<Long, User> userMap = new HashMap<>();
-
-    private AtomicLong idGen = new AtomicLong(0);
-
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public User createUser(User user) {
-        final Long id = idGen.incrementAndGet();
-        user.setId(id);
-        userMap.put(id, user);
+        userRepository.save(user);
         return user;
     }
 
     @Override
     public User getUserById(long id) {
-        if (userMap.get(id) == null) {
-            throw new IllegalArgumentException("user not found, id=" + id);
-        }
-        return userMap.get(id);
+        return userRepository.findById(id).get();
     }
 
     @Override
     public User updateUser(long id, User user) {
-        if (userMap.containsKey(id)) {
+        if (userRepository.findById(id) != null) {
             user.setId(id);
-            userMap.put(id, user);
-            return userMap.get(id);
+            userRepository.save(user);
+            return userRepository.findById(id).get();
         }
         throw new IllegalArgumentException("user not found, id=" + id);
     }
 
     @Override
     public boolean deleteUser(long id) {
-        return userMap.remove(id) != null;
+        userRepository.deleteById(id);
+        if (userRepository.findById(id) == null) {
+            return true;
+        } else return false;
     }
 
     @Override
     public List<User> getListUsers() {
-        return new ArrayList<>(userMap.values());
+        return userRepository.findAll();
     }
 }
